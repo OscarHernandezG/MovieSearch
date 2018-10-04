@@ -65,6 +65,9 @@ public class MovieActivity extends AppCompatActivity
                     public void onResponse(String response) {
                         movie = gson.fromJson(response, Movie.class);
                         UpdateMovie();
+                        Glide.with(MovieActivity.this)
+                                .load(movie.getPoster())
+                                .into(posterview);
                     }
                 },
                 new Response.ErrorListener() {
@@ -75,10 +78,6 @@ public class MovieActivity extends AppCompatActivity
                 });
 
                 queue.add(request);
-
-        Glide.with(this)
-                .load("file:///android_asset/lord.jpg")
-                .into(posterview);
     }
 
     private void UpdateMovie() {
